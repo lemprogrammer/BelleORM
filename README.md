@@ -28,7 +28,7 @@ allprojects {
 And
 ```gradle
 dependencies {
-    compile 'ninja.sakib:PultusORM:v1.7'
+    implementation 'ninja.sakib:PultusORM:v1.7'
 }
 ```
 
@@ -57,21 +57,23 @@ More option can be found [here](https://jitpack.io/#ninja.sakib/PultusORM/v1.7).
 ### Examples
 
 ##### Open database connection
+##### Kotlin
 ```kotlin
 In Kotlin,
 val pultusORM: PultusORM = PultusORM("test.db", "/Users/s4kib/")
 val pultusORM: PultusORM = PultusORM("test.db")    // DB will take place in user.home directory
 
-In Android (Kotlin),
+In Android,
 val appPath: String = getApplicationContext().getFilesDir().getAbsolutePath()  // Output : /data/data/application_package_name/files/
 val pultusORM: PultusORM = PultusORM("test.db", appPath)
 ```
+##### Java
 ```java
 In Java,
 PultusORM orm = new PultusORM("test.db", "/Users/s4kib/")
 PultusORM orm = new PultusORM("test.db", )  // DB will take place in user.home directory
 
-In Android (Java),
+In Android,
 String appPath = getApplicationContext().getFilesDir().getAbsolutePath()  // Output : /data/data/application_package_name/files/
 val orm = new PultusORM("test.db", appPath)
 ```
