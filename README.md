@@ -1,8 +1,8 @@
 # PultusORM [![](https://jitpack.io/v/ninja.sakib/PultusORM.svg)](https://jitpack.io/#ninja.sakib/PultusORM)
-A Sqlite ORM library for kotlin, Android & Java.
+A Sqlite ORM library for Kotlin, Java & Android.
 
 Status : Active<br>
-Version : v1.6
+Version : v1.7
 
 ## Features
 Currently implemented:
@@ -28,7 +28,7 @@ allprojects {
 And
 ```gradle
 dependencies {
-    compile 'ninja.sakib:PultusORM:v1.6'
+    implementation 'ninja.sakib:PultusORM:v1.7'
 }
 ```
 
@@ -46,25 +46,36 @@ And
 <dependency>
     <groupId>ninja.sakib</groupId>
     <artifactId>PultusORM</artifactId>
-    <version>v1.6</version>
+    <version>v1.7</version>
 </dependency>
 ```
 
-In case you need jar download is available [here](https://jitpack.io/ninja/sakib/PultusORM/v1.6/PultusORM-v1.6.jar) .
+In case you need jar download is available [here](https://jitpack.io/ninja/sakib/PultusORM/v1.7/PultusORM-v1.7.jar) .
 
-More option can be found [here](https://jitpack.io/#ninja.sakib/PultusORM/v1.6).
+More option can be found [here](https://jitpack.io/#ninja.sakib/PultusORM/v1.7).
 
 ### Examples
 
 ##### Open database connection
+##### Kotlin
 ```kotlin
-In Java/Kotlin,
+In Kotlin,
 val pultusORM: PultusORM = PultusORM("test.db", "/Users/s4kib/")
 val pultusORM: PultusORM = PultusORM("test.db")    // DB will take place in user.home directory
 
 In Android,
-val appPath = getApplicationContext().getFilesDir().getAbsolutePath()  // Output : /data/data/application_package_name/files/
+val appPath: String = getApplicationContext().getFilesDir().getAbsolutePath()  // Output : /data/data/application_package_name/files/
 val pultusORM: PultusORM = PultusORM("test.db", appPath)
+```
+##### Java
+```java
+In Java,
+PultusORM orm = new PultusORM("test.db", "/Users/s4kib/")
+PultusORM orm = new PultusORM("test.db", )  // DB will take place in user.home directory
+
+In Android,
+String appPath = getApplicationContext().getFilesDir().getAbsolutePath()  // Output : /data/data/application_package_name/files/
+val orm = new PultusORM("test.db", appPath)
 ```
 
 ##### Insert value
@@ -184,5 +195,8 @@ Copyright &copy;  Sakib Sami
 
 Distributed under [MIT](https://github.com/s4kibs4mi/PultusORM/blob/master/LICENSE) license
 
-### Donation
-If you want to support this project [Donate](https://donorbox.org/pultusorm-donation)
+### Patreon Me !!!
+If you want to support this project [Patreon Me!](https://www.patreon.com/s4kibs4mi)
+
+### Buy Me a Coffee
+[Checkout with Paypal](https://www.paypal.me/s4kib/10)
