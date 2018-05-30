@@ -9,6 +9,7 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.util.*
 
 /**
  * := Coded with love by Sakib Sami on 10/7/16.
@@ -27,12 +28,16 @@ class PultusORMTest : Callback {
 
     @Test
     fun saveTest() {
-        val student: Student = Student()
-        student.name = "Sakib Sayem"
-//        student.department = "CSE"
+        val student = Student()
+        student.setName("Sakib Sayem")
+        student.department = "CSE"
         student.cgpa = 2.3
+        student.selction = "A"
         student.email = "s4kibs4mi@gmail.com"
         student.website = "https://www.sakib.ninja"
+        student.dateOfBirth = Date()
+        student.createdAt = Calendar.getInstance().time
+        student.updatedAt = Calendar.getInstance().time
 
         val result = pultusORM.save(student)
         Assert.assertTrue(result)
@@ -41,7 +46,7 @@ class PultusORMTest : Callback {
     @Test
     fun saveWithDateTest() {
         val student = Student()
-        student.name = "Sakib Sayem"
+//        student.name = "Sakib Sayem"
         student.cgpa = 2.3
         student.email = "s4kibs4mi@gmail.com"
         student.website = "https://www.sakib.ninja"
@@ -54,7 +59,7 @@ class PultusORMTest : Callback {
     @Test
     fun saveTestWithCallback() {
         val student: Student = Student()
-        student.name = "Ayasha"
+//        student.name = "Nur"
         student.department = "CSE"
         student.cgpa = 3.7
 
@@ -67,12 +72,15 @@ class PultusORMTest : Callback {
         for (it in students) {
             val student = it as Student
             println(student.studentId)
-            println(student.name)
+            println(student.getName())
             println(student.department)
             println(student.cgpa)
             println(student.email)
             println(student.website)
             println(student.dateOfBirth)
+            println(student.createdAt)
+            println(student.updatedAt)
+            println(student.selction)
             println()
         }
     }
@@ -95,7 +103,7 @@ class PultusORMTest : Callback {
         for (it in students) {
             val student = it as Student
             println("${student.studentId}")
-            println("${student.name}")
+//            println("${student.name}")
         }
     }
 

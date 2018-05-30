@@ -5,6 +5,6 @@ package ninja.sakib.pultusorm.models
  */
 
 open class Contact {
-    var email = ""
-    var website = ""
+    var email = "a@a.com"
+    var website = "www.a.com"
 }

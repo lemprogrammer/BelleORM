@@ -16,10 +16,21 @@ class Student : Contact() {
     @PrimaryKey
     @AutoIncrement
     var studentId: Int = 0
-    var name: String? = null
+    private var name: String? = null
     var department: String? = null
     var cgpa: Double = 0.0
     var dateOfBirth: Date? = null
     @Ignore
     var selction: String? = null
+
+    fun getName(): String? {
+        return name
+    }
+
+    fun setName(v: String) {
+        this.name = v
+    }
+
+    var createdAt: Date? = null
+    var updatedAt: Date? = null
 }
