@@ -34,12 +34,13 @@ class PultusORMCondition private constructor(builder: Builder) {
         private var conditionQuery: StringBuilder = StringBuilder() // Condition Queries
         private var sortQuery: StringBuilder = StringBuilder()  // Sort Queries
         private var groupQuery: StringBuilder = StringBuilder() // Group Queries
+        private var limitQuery: StringBuilder = StringBuilder()  // Limit Queries
 
         /**
          * Method to add equal condition
          * @param key field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun eq(key: String, value: Any): Builder {
             addSeparator()
@@ -56,7 +57,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add not equal condition
          * @param key field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun notEq(key: String, value: Any): Builder {
             addSeparator()
@@ -74,7 +75,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * @param key name of queried value
          * @param begin start value
          * @param end end value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun between(key: String, begin: Any, end: Any): Builder {
             if (isNumeric(begin) && isNumeric(end)) {
@@ -89,7 +90,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * @param key name of queried value
          * @param begin start value
          * @param end end value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun In(key: String, begin: Any, end: Any): Builder {
             if (isNumeric(begin) && isNumeric(end)) {
@@ -104,7 +105,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * @param key name of queried value
          * @param begin start value
          * @param end end value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun notIn(key: String, begin: Any, end: Any): Builder {
             if (isNumeric(begin) && isNumeric(end)) {
@@ -116,7 +117,7 @@ class PultusORMCondition private constructor(builder: Builder) {
 
         /**
          * Method to add and clause
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun and(): Builder {
             addSeparator()
@@ -127,7 +128,7 @@ class PultusORMCondition private constructor(builder: Builder) {
 
         /**
          * Method to add or clause
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun or(): Builder {
             addSeparator()
@@ -139,7 +140,7 @@ class PultusORMCondition private constructor(builder: Builder) {
         /**
          * Method to concat condition with first bracket using OR
          * @param condition
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun or(condition: Builder): Builder {
             addSeparator()
@@ -151,7 +152,7 @@ class PultusORMCondition private constructor(builder: Builder) {
         /**
          * Method to concat condition with first bracket using AND
          * @param condition
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun and(condition: Builder): Builder {
             addSeparator()
@@ -164,7 +165,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add greater condition
          * @param key field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun greater(key: String, value: Any): Builder {
             addSeparator()
@@ -180,7 +181,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add less condition
          * @param key field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun less(key: String, value: Any): Builder {
             addSeparator()
@@ -196,7 +197,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add greater or equal condition
          * @param key field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun greaterEq(key: String, value: Any): Builder {
             addSeparator()
@@ -212,7 +213,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add less or equal condition
          * @param key field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun lessEq(key: String, value: Any): Builder {
             addSeparator()
@@ -228,7 +229,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add sort condition
          * @param fieldName field name
          * @param order ordering type
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun sort(fieldName: String, order: PultusORMQuery.Sort): Builder {
             if (sortQuery.isNotEmpty())
@@ -252,7 +253,7 @@ class PultusORMCondition private constructor(builder: Builder) {
         /**
          * Method to add group by condition
          * @param fieldName field name
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun group(fieldName: String): Builder {
             if (groupQuery.isNotEmpty())
@@ -266,7 +267,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add search condition
          * @param fieldName field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun startsWith(fieldName: String, value: Any): Builder {
             addSeparator()
@@ -279,7 +280,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add search condition
          * @param fieldName field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun endsWith(fieldName: String, value: Any): Builder {
             addSeparator()
@@ -292,7 +293,7 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method to add search condition
          * @param fieldName field name
          * @param value field value
-         * @return Builder with contacted current condition
+         * @return Builder with appended current condition
          */
         fun contains(fieldName: String, value: Any): Builder {
             addSeparator()
@@ -302,11 +303,23 @@ class PultusORMCondition private constructor(builder: Builder) {
         }
 
         /**
+         * Method to limit items in result
+         * @param limit amount
+         * @return Builder with appended current condition
+         */
+        fun limit(limit: Long): Builder {
+            addSeparator()
+
+            limitQuery.append("LIMIT $limit")
+            return this
+        }
+
+        /**
          * Method to create final query as String
          * @return String
          */
         fun rawQuery(): String {
-            val query: StringBuilder = StringBuilder()
+            val query = StringBuilder()
             if (conditionQuery.isNotEmpty())
                 query.append("WHERE $conditionQuery")
 
@@ -321,6 +334,10 @@ class PultusORMCondition private constructor(builder: Builder) {
 
             if (sortQuery.isNotEmpty())
                 query.append("ORDER BY $sortQuery")
+
+            if (limitQuery.isNotEmpty()) {
+                query.append(limitQuery)
+            }
 
             return query.toString()
         }

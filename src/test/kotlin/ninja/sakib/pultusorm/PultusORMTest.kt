@@ -135,10 +135,20 @@ class PultusORMTest : Callback {
     @Test
     fun count() {
         val condition = PultusORMCondition.Builder()
-                .eq("cgpa", 2.3)
+                .eq("cgpa", 3.3)
                 .build()
         val count = pultusORM.count(Student(), condition)
         println("Items : $count")
+    }
+
+    @Test
+    fun limit() {
+        val condition = PultusORMCondition.Builder()
+                .eq("cgpa", 2.3)
+                .limit(2)
+                .build()
+        val students = pultusORM.find(Student(), condition)
+        println("Items : ${students.size}")
     }
 
     override fun onSuccess(type: PultusORMQuery.Type) {
