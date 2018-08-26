@@ -2,7 +2,7 @@
 A Sqlite ORM library for Kotlin, Java & Android.
 
 Status : Active<br>
-Version : v1.7
+Version : v1.8
 
 ## Features
 Currently implemented:
@@ -12,7 +12,6 @@ Currently implemented:
 * Update
 * Delete
 * Drop
-
 
 ### Usages
 In your build file add
@@ -28,7 +27,7 @@ allprojects {
 And
 ```gradle
 dependencies {
-    implementation 'ninja.sakib:PultusORM:v1.7'
+    implementation 'ninja.sakib:PultusORM:v1.8'
 }
 ```
 
@@ -46,13 +45,13 @@ And
 <dependency>
     <groupId>ninja.sakib</groupId>
     <artifactId>PultusORM</artifactId>
-    <version>v1.7</version>
+    <version>v1.8</version>
 </dependency>
 ```
 
-In case you need jar download is available [here](https://jitpack.io/ninja/sakib/PultusORM/v1.7/PultusORM-v1.7.jar) .
+In case you need jar download is available [here](https://jitpack.io/ninja/sakib/PultusORM/v1.8/PultusORM-v1.8.jar) .
 
-More option can be found [here](https://jitpack.io/#ninja.sakib/PultusORM/v1.7).
+More option can be found [here](https://jitpack.io/#ninja.sakib/PultusORM/v1.8).
 
 ### Examples
 
