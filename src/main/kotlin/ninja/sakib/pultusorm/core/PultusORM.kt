@@ -180,7 +180,16 @@ class PultusORM {
      * @param clazz which type of data will count
      */
     fun count(clazz: Any): Long {
-        return PultusORMQuery(connection!!).count(clazz)
+        return PultusORMQuery(connection!!).count(clazz, null)
+    }
+
+    /**
+     * Method to get number of objects of a specific type
+     * @param clazz which type of data will count
+     * @param condition if you want to apply any condition to count or pass null
+     */
+    fun count(clazz: Any, condition: PultusORMCondition?): Long {
+        return PultusORMQuery(connection!!).count(clazz, condition)
     }
 
     /**

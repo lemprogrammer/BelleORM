@@ -31,7 +31,7 @@ class PultusORMTest : Callback {
         val student = Student()
         student.setName("Sakib Sayem")
         student.department = "CSE"
-        student.cgpa = 2.3
+        student.cgpa = 3.3
         student.selction = "A"
         student.email = "s4kibs4mi@gmail.com"
         student.website = "https://www.sakib.ninja"
@@ -130,6 +130,15 @@ class PultusORMTest : Callback {
     @Test
     fun dropTable() {
         pultusORM.drop(Student())
+    }
+
+    @Test
+    fun count() {
+        val condition = PultusORMCondition.Builder()
+                .eq("cgpa", 2.3)
+                .build()
+        val count = pultusORM.count(Student(), condition)
+        println("Items : $count")
     }
 
     override fun onSuccess(type: PultusORMQuery.Type) {

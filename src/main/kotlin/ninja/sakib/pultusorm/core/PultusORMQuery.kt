@@ -272,20 +272,24 @@ class PultusORMQuery(connection: Connection) {
      * @param clazz
      * @return Long
      */
-    fun count(clazz: Any): Long {
+    fun count(clazz: Any, condition: PultusORMCondition?): Long {
         createTable(clazz)
 
-        var counter: Long = 0
-        val query = Builder().select(clazz)
+        val query = if (condition != null) {
+            Builder().count(clazz, condition)
+        } else {
+            Builder().count(clazz)
+        }
+
         try {
             val result: ResultSet = statement.executeQuery(query)
-            while (result.next()) {
-                counter++
+            if (result.next()) {
+                return result.getLong("c")
             }
         } catch (exception: Exception) {
             throwback("Malformed query <$query>.")
         }
-        return counter
+        return 0
     }
 
     /**
@@ -389,9 +393,9 @@ class PultusORMQuery(connection: Connection) {
         }
 
         fun select(clazz: Any, condition: PultusORMCondition): String {
-            if (condition.rawQuery().trim().isNotEmpty()) {
-                return "SELECT * FROM ${clazz.javaClass.simpleName} ${condition.rawQuery()};"
-            } else return select(clazz)
+            return if (condition.rawQuery().trim().isNotEmpty()) {
+                "SELECT * FROM ${clazz.javaClass.simpleName} ${condition.rawQuery()};"
+            } else select(clazz)
         }
 
         fun select(clazz: Any): String {
@@ -399,7 +403,7 @@ class PultusORMQuery(connection: Connection) {
         }
 
         fun update(clazz: Any, updateQuery: PultusORMUpdater): String {
-            val query: StringBuilder = StringBuilder()
+            val query = StringBuilder()
             query.append("UPDATE ${clazz.javaClass.simpleName} SET ")
             query.append(updateQuery.updateQuery())
             if (updateQuery.condition() != null)
@@ -419,6 +423,14 @@ class PultusORMQuery(connection: Connection) {
 
         fun drop(clazz: Any): String {
             return "DROP TABLE ${clazz.javaClass.simpleName};"
+        }
+
+        fun count(clazz: Any): String {
+            return "SELECT COUNT(*) as c FROM ${clazz.javaClass.simpleName};"
+        }
+
+        fun count(clazz: Any, condition: PultusORMCondition): String {
+            return "SELECT COUNT(*) as c FROM ${clazz.javaClass.simpleName} ${condition.rawQuery()};"
         }
     }
 }
