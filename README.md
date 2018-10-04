@@ -1,4 +1,4 @@
-# PultusORM [![](https://jitpack.io/v/ninja.sakib/PultusORM.svg)](https://jitpack.io/#ninja.sakib/PultusORM)
+# BelleORM [![](https://jitpack.io/v/ninja.sakib/BelleORM.svg)](https://jitpack.io/#ninja.sakib/BelleORM)
 A Sqlite ORM library for Kotlin, Java & Android.
 
 Status : Active<br>
@@ -27,7 +27,7 @@ allprojects {
 And
 ```gradle
 dependencies {
-    implementation 'ninja.sakib:PultusORM:v1.8'
+    implementation 'ninja.sakib:BelleORM:v1.8'
 }
 ```
 
@@ -44,14 +44,14 @@ And
 ```xml
 <dependency>
     <groupId>ninja.sakib</groupId>
-    <artifactId>PultusORM</artifactId>
+    <artifactId>BelleORM</artifactId>
     <version>v1.8</version>
 </dependency>
 ```
 
-In case you need jar download is available [here](https://jitpack.io/ninja/sakib/PultusORM/v1.8/PultusORM-v1.8.jar) .
+In case you need jar download is available [here](https://jitpack.io/ninja/sakib/BelleORM/v1.8/BelleORM-v1.8.jar) .
 
-More option can be found [here](https://jitpack.io/#ninja.sakib/PultusORM/v1.8).
+More option can be found [here](https://jitpack.io/#ninja.sakib/BelleORM/v1.8).
 
 ### Examples
 
@@ -168,7 +168,7 @@ pultusORM.delete(Student())
 pultusORM.drop(Student())
 ```
 
-**Check out more examples & API docs [here](http://pultusorm.sakib.ninja)**
+**Check out more examples & API docs [here](https://s4kibs4mi.github.io/BelleORM/)**
 
 ---
 
@@ -192,7 +192,7 @@ as that will be handled by sqlite.
 ### License
 Copyright &copy;  Sakib Sami
 
-Distributed under [MIT](https://github.com/s4kibs4mi/PultusORM/blob/master/LICENSE) license
+Distributed under [MIT](https://github.com/s4kibs4mi/BelleORM/blob/master/LICENSE) license
 
 ### Patreon Me !!!
 If you want to support this project [Patreon Me!](https://www.patreon.com/s4kibs4mi)
