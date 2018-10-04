@@ -1,11 +1,11 @@
-package ninja.sakib.pultusorm.core
+package ninja.sakib.belleorm.core
 
 import com.eclipsesource.json.Json
 import com.eclipsesource.json.JsonObject
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import ninja.sakib.pultusorm.annotations.*
-import ninja.sakib.pultusorm.exceptions.PultusORMException
+import ninja.sakib.belleorm.annotations.*
+import ninja.sakib.belleorm.exceptions.BelleORMException
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import java.lang.reflect.Field
@@ -82,7 +82,7 @@ fun getUserHomeDirectory(): String {
  * @param msg
  */
 fun throwback(msg: String) {
-    throw PultusORMException(msg)
+    throw BelleORMException(msg)
 }
 
 /**

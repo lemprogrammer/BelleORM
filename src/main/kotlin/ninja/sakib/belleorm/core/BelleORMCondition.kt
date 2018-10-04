@@ -1,4 +1,4 @@
-package ninja.sakib.pultusorm.core
+package ninja.sakib.belleorm.core
 
 /**
  * := Coded with love by Sakib Sami on 10/3/16.
@@ -8,10 +8,10 @@ package ninja.sakib.pultusorm.core
  */
 
 /**
- * PultusORMCondition
+ * BelleORMCondition
  * Class used to provide condition on queries
  */
-class PultusORMCondition private constructor(builder: Builder) {
+class BelleORMCondition private constructor(builder: Builder) {
     private var rawQuery: String = ""
 
     init {
@@ -231,17 +231,17 @@ class PultusORMCondition private constructor(builder: Builder) {
          * @param order ordering type
          * @return Builder with appended current condition
          */
-        fun sort(fieldName: String, order: PultusORMQuery.Sort): Builder {
+        fun sort(fieldName: String, order: BelleORMQuery.Sort): Builder {
             if (sortQuery.isNotEmpty())
                 sortQuery.append(",")
 
             when (order) {
-                PultusORMQuery.Sort.ASCENDING -> {
+                BelleORMQuery.Sort.ASCENDING -> {
                     addSeparator()
 
                     sortQuery.append("$fieldName ASC")
                 }
-                PultusORMQuery.Sort.DESCENDING -> {
+                BelleORMQuery.Sort.DESCENDING -> {
                     addSeparator()
 
                     sortQuery.append("$fieldName DESC")
@@ -346,8 +346,8 @@ class PultusORMCondition private constructor(builder: Builder) {
          * Method build condition and
          * return it
          */
-        fun build(): PultusORMCondition {
-            return PultusORMCondition(this)
+        fun build(): BelleORMCondition {
+            return BelleORMCondition(this)
         }
 
         private fun addSeparator() {

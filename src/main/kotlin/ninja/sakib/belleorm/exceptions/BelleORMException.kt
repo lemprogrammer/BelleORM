@@ -1,4 +1,4 @@
-package ninja.sakib.pultusorm.exceptions
+package ninja.sakib.belleorm.exceptions
 
 import java.lang.Exception
 
@@ -10,11 +10,11 @@ import java.lang.Exception
  */
 
 /**
- * Custom Exception class for PultusORM
+ * Custom Exception class for BelleORM
  * This is class is used to handle exception
  * if any occur
  */
-class PultusORMException(msg: String) : Exception() {
+class BelleORMException(msg: String) : Exception() {
     private var msg: String = ""
 
     init {

@@ -1,9 +1,9 @@
-package ninja.sakib.pultusorm
+package ninja.sakib.belleorm
 
-import ninja.sakib.pultusorm.callbacks.Callback
-import ninja.sakib.pultusorm.core.*
-import ninja.sakib.pultusorm.exceptions.PultusORMException
-import ninja.sakib.pultusorm.models.Student
+import ninja.sakib.belleorm.callbacks.Callback
+import ninja.sakib.belleorm.core.*
+import ninja.sakib.belleorm.exceptions.BelleORMException
+import ninja.sakib.belleorm.models.Student
 import org.joda.time.DateTime
 import org.junit.After
 import org.junit.Assert
@@ -18,8 +18,8 @@ import java.util.*
  * := Coffee : Dream : Code
  */
 
-class PultusORMTest : Callback {
-    val pultusORM: PultusORM = PultusORM("univ.db")
+class BelleORMTest : Callback {
+    val belleORM: BelleORM = BelleORM("univ.db")
 
     @Before
     fun setUp() {
@@ -39,7 +39,7 @@ class PultusORMTest : Callback {
         student.createdAt = Calendar.getInstance().time
         student.updatedAt = Calendar.getInstance().time
 
-        val result = pultusORM.save(student)
+        val result = belleORM.save(student)
         Assert.assertTrue(result)
     }
 
@@ -52,7 +52,7 @@ class PultusORMTest : Callback {
         student.website = "https://www.sakib.ninja"
         student.dateOfBirth = DateTime.now().toDate()
 
-        val result = pultusORM.save(student)
+        val result = belleORM.save(student)
         Assert.assertTrue(result)
     }
 
@@ -63,12 +63,12 @@ class PultusORMTest : Callback {
         student.department = "CSE"
         student.cgpa = 3.7
 
-        pultusORM.save(student, this)
+        belleORM.save(student, this)
     }
 
     @Test
     fun findAll() {
-        val students = pultusORM.find(Student())
+        val students = belleORM.find(Student())
         for (it in students) {
             val student = it as Student
             println(student.studentId)
@@ -87,19 +87,19 @@ class PultusORMTest : Callback {
 
     @Test
     fun findWithCondition() {
-        val condition: PultusORMCondition = PultusORMCondition.Builder()
+        val condition: BelleORMCondition = BelleORMCondition.Builder()
                 .eq("name", "sakib")
                 .and()
                 .greaterEq("cgpa", 15.34)
                 .or()
                 .startsWith("name", "sami")
-                .sort("name", PultusORMQuery.Sort.DESCENDING)
-                .sort("department", PultusORMQuery.Sort.ASCENDING)
+                .sort("name", BelleORMQuery.Sort.DESCENDING)
+                .sort("department", BelleORMQuery.Sort.ASCENDING)
                 .build()
 
         println(condition.rawQuery())
 
-        val students = pultusORM.find(Student(), condition)
+        val students = belleORM.find(Student(), condition)
         for (it in students) {
             val student = it as Student
             println("${student.studentId}")
@@ -109,53 +109,53 @@ class PultusORMTest : Callback {
 
     @Test
     fun updateValue() {
-        val condition: PultusORMCondition = PultusORMCondition.Builder()
+        val condition: BelleORMCondition = BelleORMCondition.Builder()
                 .contains("name", "Sakib")
                 .build()
 
-        val updater: PultusORMUpdater = PultusORMUpdater.Builder()
+        val updater: BelleORMUpdater = BelleORMUpdater.Builder()
                 .set("name", "Sayan Nur")
                 .condition(condition)
                 .build()
 
-        pultusORM.update(Student(), updater)
+        belleORM.update(Student(), updater)
     }
 
     @Test
     fun deleteValue() {
-        val result = pultusORM.delete(Student())
+        val result = belleORM.delete(Student())
         Assert.assertTrue(result)
     }
 
     @Test
     fun dropTable() {
-        pultusORM.drop(Student())
+        belleORM.drop(Student())
     }
 
     @Test
     fun count() {
-        val condition = PultusORMCondition.Builder()
+        val condition = BelleORMCondition.Builder()
                 .eq("cgpa", 3.3)
                 .build()
-        val count = pultusORM.count(Student(), condition)
+        val count = belleORM.count(Student(), condition)
         println("Items : $count")
     }
 
     @Test
     fun limit() {
-        val condition = PultusORMCondition.Builder()
+        val condition = BelleORMCondition.Builder()
                 .eq("cgpa", 2.3)
                 .limit(2)
                 .build()
-        val students = pultusORM.find(Student(), condition)
+        val students = belleORM.find(Student(), condition)
         println("Items : ${students.size}")
     }
 
-    override fun onSuccess(type: PultusORMQuery.Type) {
+    override fun onSuccess(type: BelleORMQuery.Type) {
         println("${type.name} success")
     }
 
-    override fun onFailure(type: PultusORMQuery.Type, exception: PultusORMException) {
+    override fun onFailure(type: BelleORMQuery.Type, exception: BelleORMException) {
         Assert.fail("${type.name} - ${exception.message}")
     }
 

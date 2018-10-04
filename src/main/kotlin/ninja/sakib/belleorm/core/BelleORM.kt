@@ -1,6 +1,6 @@
-package ninja.sakib.pultusorm.core
+package ninja.sakib.belleorm.core
 
-import ninja.sakib.pultusorm.callbacks.Callback
+import ninja.sakib.belleorm.callbacks.Callback
 import java.sql.Connection
 import java.sql.DriverManager
 
@@ -13,11 +13,11 @@ import java.sql.DriverManager
 
 
 /**
- * Base class of PultusORM API
+ * Base class of BelleORM API
  * It handles database connection
  * and serves queries
  */
-class PultusORM {
+class BelleORM {
     private var databaseName: String? = null    // Name of the database
     private var databasePath: String? = null    // Path to database
     private var connection: Connection? = null  // Connection to database
@@ -72,7 +72,7 @@ class PultusORM {
      * @param clazz Class object which data want to add
      */
     fun save(clazz: Any): Boolean {
-        return PultusORMQuery(connection!!).save(clazz)
+        return BelleORMQuery(connection!!).save(clazz)
     }
 
     /**
@@ -81,7 +81,7 @@ class PultusORM {
      * @param callback will be fired on task complete
      */
     fun save(clazz: Any, callback: Callback) {
-        PultusORMQuery(connection!!).save(clazz, callback)
+        BelleORMQuery(connection!!).save(clazz, callback)
     }
 
     /**
@@ -89,8 +89,8 @@ class PultusORM {
      * @param clazz value of which class going to update
      * @param updater holds update condition and values
      */
-    fun update(clazz: Any, updater: PultusORMUpdater): Boolean {
-        return PultusORMQuery(connection!!).update(clazz, updater)
+    fun update(clazz: Any, updater: BelleORMUpdater): Boolean {
+        return BelleORMQuery(connection!!).update(clazz, updater)
     }
 
     /**
@@ -99,8 +99,8 @@ class PultusORM {
      * @param updater holds update condition and values
      * @param callback will be fired on task complete
      */
-    fun update(clazz: Any, updater: PultusORMUpdater, callback: Callback) {
-        PultusORMQuery(connection!!).update(clazz, updater, callback)
+    fun update(clazz: Any, updater: BelleORMUpdater, callback: Callback) {
+        BelleORMQuery(connection!!).update(clazz, updater, callback)
     }
 
     /**
@@ -109,7 +109,7 @@ class PultusORM {
      * @return MutableList of type Any
      */
     fun find(clazz: Any): MutableList<Any> {
-        return PultusORMQuery(connection!!).get(clazz)
+        return BelleORMQuery(connection!!).get(clazz)
     }
 
     /**
@@ -118,8 +118,8 @@ class PultusORM {
      * @param condition condition will be used to get data
      * @return MutableList of type Any
      */
-    fun find(clazz: Any, condition: PultusORMCondition): MutableList<Any> {
-        return PultusORMQuery(connection!!).get(clazz, condition)
+    fun find(clazz: Any, condition: BelleORMCondition): MutableList<Any> {
+        return BelleORMQuery(connection!!).get(clazz, condition)
     }
 
     /**
@@ -127,7 +127,7 @@ class PultusORM {
      * @param clazz which type of data will be deleted
      */
     fun delete(clazz: Any): Boolean {
-        return PultusORMQuery(connection!!).delete(clazz)
+        return BelleORMQuery(connection!!).delete(clazz)
     }
 
     /**
@@ -135,8 +135,8 @@ class PultusORM {
      * @param clazz which type of data will be deleted
      * @param condition will be used to delete data
      */
-    fun delete(clazz: Any, condition: PultusORMCondition): Boolean {
-        return PultusORMQuery(connection!!).delete(clazz, condition)
+    fun delete(clazz: Any, condition: BelleORMCondition): Boolean {
+        return BelleORMQuery(connection!!).delete(clazz, condition)
     }
 
     /**
@@ -145,7 +145,7 @@ class PultusORM {
      * @param callback will be fired on task complete
      */
     fun delete(clazz: Any, callback: Callback) {
-        PultusORMQuery(connection!!).delete(clazz, callback)
+        BelleORMQuery(connection!!).delete(clazz, callback)
     }
 
     /**
@@ -154,8 +154,8 @@ class PultusORM {
      * @param condition will be used to delete data
      * @param callback will be fired on task complete
      */
-    fun delete(clazz: Any, condition: PultusORMCondition, callback: Callback) {
-        PultusORMQuery(connection!!).delete(clazz, condition, callback)
+    fun delete(clazz: Any, condition: BelleORMCondition, callback: Callback) {
+        BelleORMQuery(connection!!).delete(clazz, condition, callback)
     }
 
     /**
@@ -163,7 +163,7 @@ class PultusORM {
      * @param clazz which type of table will be deleted
      */
     fun drop(clazz: Any): Boolean {
-        return PultusORMQuery(connection!!).drop(clazz)
+        return BelleORMQuery(connection!!).drop(clazz)
     }
 
     /**
@@ -172,7 +172,7 @@ class PultusORM {
      * @param callback will be fired on task complete
      */
     fun drop(clazz: Any, callback: Callback) {
-        PultusORMQuery(connection!!).drop(clazz, callback)
+        BelleORMQuery(connection!!).drop(clazz, callback)
     }
 
     /**
@@ -180,7 +180,7 @@ class PultusORM {
      * @param clazz which type of data will count
      */
     fun count(clazz: Any): Long {
-        return PultusORMQuery(connection!!).count(clazz, null)
+        return BelleORMQuery(connection!!).count(clazz, null)
     }
 
     /**
@@ -188,8 +188,8 @@ class PultusORM {
      * @param clazz which type of data will count
      * @param condition if you want to apply any condition to count or pass null
      */
-    fun count(clazz: Any, condition: PultusORMCondition?): Long {
-        return PultusORMQuery(connection!!).count(clazz, condition)
+    fun count(clazz: Any, condition: BelleORMCondition?): Long {
+        return BelleORMQuery(connection!!).count(clazz, condition)
     }
 
     /**

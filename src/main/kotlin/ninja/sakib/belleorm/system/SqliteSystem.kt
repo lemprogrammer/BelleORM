@@ -1,4 +1,4 @@
-package ninja.sakib.pultusorm.system
+package ninja.sakib.belleorm.system
 
 /**
  * := Coded with love by Sakib Sami on 9/28/16.

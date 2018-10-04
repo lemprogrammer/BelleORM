@@ -1,4 +1,5 @@
-package ninja.sakib.pultusorm.annotations
+package ninja.sakib.belleorm.annotations;
+
 
 /**
  * := Coded with love by Sakib Sami on 9/28/16.
@@ -8,8 +9,8 @@ package ninja.sakib.pultusorm.annotations
  */
 
 /**
- * Annotation to mark a field auto increment enabled
+ * Annotation to mark a field as primary key
  */
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AutoIncrement()
+annotation class PrimaryKey()

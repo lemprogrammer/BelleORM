@@ -1,4 +1,4 @@
-package ninja.sakib.pultusorm.core
+package ninja.sakib.belleorm.core
 
 /**
  * := Coded with love by Sakib Sami on 10/5/16.
@@ -8,11 +8,11 @@ package ninja.sakib.pultusorm.core
  */
 
 /**
- * PultusORMUpdater
+ * BelleORMUpdater
  * Class used to update value of fields
  */
-class PultusORMUpdater private constructor(condition: PultusORMCondition?, updateQuery: StringBuilder) {
-    private var condition: PultusORMCondition? = null
+class BelleORMUpdater private constructor(condition: BelleORMCondition?, updateQuery: StringBuilder) {
+    private var condition: BelleORMCondition? = null
     private var updateQuery: StringBuilder = StringBuilder()
 
     init {
@@ -24,9 +24,9 @@ class PultusORMUpdater private constructor(condition: PultusORMCondition?, updat
      * Method to get condition
      * which will be used to
      * update value of fields
-     * @return PultusORMCondition
+     * @return BelleORMCondition
      */
-    fun condition(): PultusORMCondition? {
+    fun condition(): BelleORMCondition? {
         return condition
     }
 
@@ -44,7 +44,7 @@ class PultusORMUpdater private constructor(condition: PultusORMCondition?, updat
      * Builder class is to create updater
      */
     class Builder {
-        private var condition: PultusORMCondition? = null
+        private var condition: BelleORMCondition? = null
         private val updateQuery: StringBuilder = StringBuilder()
 
         /**
@@ -67,17 +67,17 @@ class PultusORMUpdater private constructor(condition: PultusORMCondition?, updat
          * @param condition on which condition values will be updated
          * @return Builder
          */
-        fun condition(condition: PultusORMCondition): Builder {
+        fun condition(condition: BelleORMCondition): Builder {
             this.condition = condition
             return this
         }
 
         /**
          * Method to build updater
-         * @return PultusORMUpdater
+         * @return BelleORMUpdater
          */
-        fun build(): PultusORMUpdater {
-            return PultusORMUpdater(condition, updateQuery)
+        fun build(): BelleORMUpdater {
+            return BelleORMUpdater(condition, updateQuery)
         }
 
         private fun addSeparator() {

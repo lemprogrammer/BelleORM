@@ -1,8 +1,8 @@
-package ninja.sakib.pultusorm.models
+package ninja.sakib.belleorm.models
 
-import ninja.sakib.pultusorm.annotations.AutoIncrement
-import ninja.sakib.pultusorm.annotations.Ignore
-import ninja.sakib.pultusorm.annotations.PrimaryKey
+import ninja.sakib.belleorm.annotations.AutoIncrement
+import ninja.sakib.belleorm.annotations.Ignore
+import ninja.sakib.belleorm.annotations.PrimaryKey
 import java.util.*
 
 /**

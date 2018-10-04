@@ -1,4 +1,4 @@
-package ninja.sakib.pultusorm.annotations
+package ninja.sakib.belleorm.annotations
 
 /**
  * := Coded with love by Sakib Sami on 9/28/16.
@@ -8,8 +8,8 @@ package ninja.sakib.pultusorm.annotations
  */
 
 /**
- * Annotation to mark a field not to be null
+ * Annotation to mark a field auto increment enabled
  */
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class NotNull()
+annotation class AutoIncrement()

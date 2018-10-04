@@ -1,4 +1,4 @@
-package ninja.sakib.pultusorm.models
+package ninja.sakib.belleorm.models
 
 /**
  * Created by s4kib on 5/1/17.

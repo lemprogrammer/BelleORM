@@ -1,7 +1,7 @@
-package ninja.sakib.pultusorm.callbacks
+package ninja.sakib.belleorm.callbacks
 
-import ninja.sakib.pultusorm.core.PultusORMQuery
-import ninja.sakib.pultusorm.exceptions.PultusORMException
+import ninja.sakib.belleorm.core.BelleORMQuery
+import ninja.sakib.belleorm.exceptions.BelleORMException
 
 /**
  * := Coded with love by Sakib Sami on 9/27/16.
@@ -18,12 +18,12 @@ interface Callback {
      * Method will be called on successful task
      * @param type this is to indicate from which task firing this callback
      */
-    fun onSuccess(type: PultusORMQuery.Type)
+    fun onSuccess(type: BelleORMQuery.Type)
 
     /**
      * Method will be called on failure of task
      * @param type this is to indicate on which task firing this callback
      * @param exception failure information
      */
-    fun onFailure(type: PultusORMQuery.Type, exception: PultusORMException)
+    fun onFailure(type: BelleORMQuery.Type, exception: BelleORMException)
 }

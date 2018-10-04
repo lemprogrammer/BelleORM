@@ -1,8 +1,8 @@
-package ninja.sakib.pultusorm.core
+package ninja.sakib.belleorm.core
 
-import ninja.sakib.pultusorm.callbacks.Callback
-import ninja.sakib.pultusorm.exceptions.PultusORMException
-import ninja.sakib.pultusorm.system.SqliteSystem
+import ninja.sakib.belleorm.callbacks.Callback
+import ninja.sakib.belleorm.exceptions.BelleORMException
+import ninja.sakib.belleorm.system.SqliteSystem
 import java.sql.Connection
 import java.sql.ResultSet
 import java.sql.Statement
@@ -17,10 +17,10 @@ import kotlin.properties.Delegates
  */
 
 /**
- *  Base Class of PultusORM API
+ *  Base Class of BelleORM API
  *  to execute queries
  */
-class PultusORMQuery(connection: Connection) {
+class BelleORMQuery(connection: Connection) {
     /**
      * Query Type
      */
@@ -75,7 +75,7 @@ class PultusORMQuery(connection: Connection) {
                 statement.execute(Builder().insert(clazz))
                 callback.onSuccess(Type.SAVE)
             } catch (exception: Exception) {
-                val ormException: PultusORMException = PultusORMException(exception.message!!)
+                val ormException: BelleORMException = BelleORMException(exception.message!!)
                 callback.onFailure(Type.SAVE, ormException)
             }
         }
@@ -87,7 +87,7 @@ class PultusORMQuery(connection: Connection) {
      * @param condition
      * @return MutableList of type Any
      */
-    fun get(clazz: Any, condition: PultusORMCondition): MutableList<Any> {
+    fun get(clazz: Any, condition: BelleORMCondition): MutableList<Any> {
         createTable(clazz)
 
         val query = Builder().select(clazz, condition)
@@ -124,7 +124,7 @@ class PultusORMQuery(connection: Connection) {
      * @param clazz
      * @param updateQuery update parameters
      */
-    fun update(clazz: Any, updateQuery: PultusORMUpdater): Boolean {
+    fun update(clazz: Any, updateQuery: BelleORMUpdater): Boolean {
         createTable(clazz)
 
         try {
@@ -142,7 +142,7 @@ class PultusORMQuery(connection: Connection) {
      * @param updateQuery update parameters
      * @param callback
      */
-    fun update(clazz: Any, updateQuery: PultusORMUpdater, callback: Callback) {
+    fun update(clazz: Any, updateQuery: BelleORMUpdater, callback: Callback) {
         thread(start = true) {
             createTable(clazz)
 
@@ -150,7 +150,7 @@ class PultusORMQuery(connection: Connection) {
                 statement.execute(Builder().update(clazz, updateQuery))
                 callback.onSuccess(Type.UPDATE)
             } catch (exception: Exception) {
-                val ormException: PultusORMException = PultusORMException(exception.message!!)
+                val ormException: BelleORMException = BelleORMException(exception.message!!)
                 callback.onFailure(Type.UPDATE, ormException)
             }
         }
@@ -178,7 +178,7 @@ class PultusORMQuery(connection: Connection) {
      * @param clazz
      * @param condition condition to update value
      */
-    fun delete(clazz: Any, condition: PultusORMCondition): Boolean {
+    fun delete(clazz: Any, condition: BelleORMCondition): Boolean {
         createTable(clazz)
 
         try {
@@ -204,7 +204,7 @@ class PultusORMQuery(connection: Connection) {
                 statement.execute(Builder().delete(clazz))
                 callback.onSuccess(Type.DELETE)
             } catch (exception: Exception) {
-                val ormException: PultusORMException = PultusORMException(exception.message!!)
+                val ormException: BelleORMException = BelleORMException(exception.message!!)
                 callback.onFailure(Type.DELETE, ormException)
             }
         }
@@ -216,7 +216,7 @@ class PultusORMQuery(connection: Connection) {
      * @param condition
      * @param callback
      */
-    fun delete(clazz: Any, condition: PultusORMCondition, callback: Callback) {
+    fun delete(clazz: Any, condition: BelleORMCondition, callback: Callback) {
         thread(start = true) {
             createTable(clazz)
 
@@ -224,7 +224,7 @@ class PultusORMQuery(connection: Connection) {
                 statement.execute(Builder().delete(clazz, condition))
                 callback.onSuccess(Type.DELETE)
             } catch (exception: Exception) {
-                val ormException: PultusORMException = PultusORMException(exception.message!!)
+                val ormException: BelleORMException = BelleORMException(exception.message!!)
                 callback.onFailure(Type.DELETE, ormException)
             }
         }
@@ -257,11 +257,11 @@ class PultusORMQuery(connection: Connection) {
                     statement.execute(Builder().drop(clazz))
                     callback.onSuccess(Type.DROP)
                 } else {
-                    val ormException: PultusORMException = PultusORMException("Table ${clazz.javaClass.simpleName} not found.")
+                    val ormException: BelleORMException = BelleORMException("Table ${clazz.javaClass.simpleName} not found.")
                     callback.onFailure(Type.DROP, ormException)
                 }
             } catch (exception: Exception) {
-                val ormException: PultusORMException = PultusORMException(exception.message!!)
+                val ormException: BelleORMException = BelleORMException(exception.message!!)
                 callback.onFailure(Type.DROP, ormException)
             }
         }
@@ -272,7 +272,7 @@ class PultusORMQuery(connection: Connection) {
      * @param clazz
      * @return Long
      */
-    fun count(clazz: Any, condition: PultusORMCondition?): Long {
+    fun count(clazz: Any, condition: BelleORMCondition?): Long {
         createTable(clazz)
 
         val query = if (condition != null) {
@@ -392,7 +392,7 @@ class PultusORMQuery(connection: Connection) {
             return queryBuilder.toString()
         }
 
-        fun select(clazz: Any, condition: PultusORMCondition): String {
+        fun select(clazz: Any, condition: BelleORMCondition): String {
             return if (condition.rawQuery().trim().isNotEmpty()) {
                 "SELECT * FROM ${clazz.javaClass.simpleName} ${condition.rawQuery()};"
             } else select(clazz)
@@ -402,7 +402,7 @@ class PultusORMQuery(connection: Connection) {
             return "SELECT * FROM ${clazz.javaClass.simpleName};"
         }
 
-        fun update(clazz: Any, updateQuery: PultusORMUpdater): String {
+        fun update(clazz: Any, updateQuery: BelleORMUpdater): String {
             val query = StringBuilder()
             query.append("UPDATE ${clazz.javaClass.simpleName} SET ")
             query.append(updateQuery.updateQuery())
@@ -417,7 +417,7 @@ class PultusORMQuery(connection: Connection) {
             return "DELETE FROM ${clazz.javaClass.simpleName};"
         }
 
-        fun delete(clazz: Any, condition: PultusORMCondition): String {
+        fun delete(clazz: Any, condition: BelleORMCondition): String {
             return "DELETE FROM ${clazz.javaClass.simpleName} ${condition.rawQuery()};"
         }
 
@@ -429,7 +429,7 @@ class PultusORMQuery(connection: Connection) {
             return "SELECT COUNT(*) as c FROM ${clazz.javaClass.simpleName};"
         }
 
-        fun count(clazz: Any, condition: PultusORMCondition): String {
+        fun count(clazz: Any, condition: BelleORMCondition): String {
             return "SELECT COUNT(*) as c FROM ${clazz.javaClass.simpleName} ${condition.rawQuery()};"
         }
     }

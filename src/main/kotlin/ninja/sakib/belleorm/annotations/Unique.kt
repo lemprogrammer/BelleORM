@@ -1,4 +1,4 @@
-package ninja.sakib.pultusorm.annotations
+package ninja.sakib.belleorm.annotations
 
 /**
  * := Coded with love by Sakib Sami on 10/4/16.

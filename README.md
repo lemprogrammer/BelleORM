@@ -59,22 +59,22 @@ More option can be found [here](https://jitpack.io/#ninja.sakib/BelleORM/v1.8).
 ##### Kotlin
 ```kotlin
 In Kotlin,
-val pultusORM: PultusORM = PultusORM("test.db", "/Users/s4kib/")
-val pultusORM: PultusORM = PultusORM("test.db")    // DB will take place in user.home directory
+val belleORM: BelleORM = BelleORM("test.db", "/Users/s4kib/")
+val belleORM: BelleORM = BelleORM("test.db")    // DB will take place in user.home directory
 
 In Android,
 val appPath: String = getApplicationContext().getFilesDir().getAbsolutePath()  // Output : /data/data/application_package_name/files/
-val pultusORM: PultusORM = PultusORM("test.db", appPath)
+val belleORM: BelleORM = BelleORM("test.db", appPath)
 ```
 ##### Java
 ```java
 In Java,
-PultusORM orm = new PultusORM("test.db", "/Users/s4kib/")
-PultusORM orm = new PultusORM("test.db", )  // DB will take place in user.home directory
+BelleORM belleORM = new BelleORM("test.db", "/Users/s4kib/")
+BelleORM belleORM = new BelleORM("test.db", )  // DB will take place in user.home directory
 
 In Android,
 String appPath = getApplicationContext().getFilesDir().getAbsolutePath()  // Output : /data/data/application_package_name/files/
-val orm = new PultusORM("test.db", appPath)
+val belleORM = new BelleORM("test.db", appPath)
 ```
 
 ##### Insert value
@@ -96,13 +96,13 @@ student.name = "Sakib Sayem"
 student.department = "CSE"
 student.cgpa = 2.3
 student.dateOfBirth = Date()
-pultusORM.save(student)
-pultusORM.close()
+belleORM.save(student)
+belleORM.close()
 ```
 
 ##### Retrieve Values
 ```kotlin
-val students = pultusORM.find(Student())
+val students = belleORM.find(Student())
 for (it in students) {
     val student = it as Student
     println(student.studentId)
@@ -125,17 +125,17 @@ Wed Sep 27 23:21:52 BDT 2017
 
 ##### Retrieve values based on condition
 ```kotlin
-val condition: PultusORMCondition = PultusORMCondition.Builder()
+val condition: BelleORMCondition = BelleORMCondition.Builder()
             .eq("name", "sakib")
             .and()
             .greaterEq("cgpa", 18)
             .or()
             .startsWith("name", "sami")
-            .sort("name", PultusORMQuery.Sort.DESCENDING)
-            .sort("department", PultusORMQuery.Sort.ASCENDING)
+            .sort("name", BelleORMQuery.Sort.DESCENDING)
+            .sort("department", BelleORMQuery.Sort.ASCENDING)
             .build()
 
-val students = pultusORM.find(Student(), condition)
+val students = belleORM.find(Student(), condition)
 for (it in students) {
     val student = it as Student
     println("${student.studentId}")
@@ -146,26 +146,26 @@ for (it in students) {
 ##### Update value
 ```kotlin
 // values will be updated based on this condition
-val condition: PultusORMCondition = PultusORMCondition.Builder()
+val condition: BelleORMCondition = BelleORMCondition.Builder()
             .eq("name", "Sakib")
             .build()
 
-val updater: PultusORMUpdater = PultusORMUpdater.Builder()
+val updater: BelleORMUpdater = BelleORMUpdater.Builder()
             .set("name", "Sayan Nur")
             .condition(condition)   // condition is optional
             .build()
 
-pultusORM.update(Student(), updater)
+belleORM.update(Student(), updater)
 ```
 
 ##### Delete values
 ```kotlin
-pultusORM.delete(Student())
+belleORM.delete(Student())
 ```
 
 ##### Drop Table
 ```kotlin
-pultusORM.drop(Student())
+belleORM.drop(Student())
 ```
 
 **Check out more examples & API docs [here](https://s4kibs4mi.github.io/BelleORM/)**

@@ -1,4 +1,4 @@
-group 'ninja.sakib.pultusorm'
+group 'ninja.sakib.belleorm'
 version '1.7'
 
 buildscript {
